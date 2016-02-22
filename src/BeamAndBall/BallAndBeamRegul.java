@@ -9,9 +9,7 @@ public class BallAndBeamRegul extends Thread {
     private PI PIcontroller;
     private PID PIDcontroller;
 
-    private AnalogSource analogIn;
-    private AnalogSink analogOut;
-    private AnalogSink analogRef;
+
 
 
     // Declarations
@@ -53,31 +51,31 @@ public class BallAndBeamRegul extends Thread {
         long t = System.currentTimeMillis();
         while (true) {
             // Read inputs
-            double y = analogIn.get();
-            double ref = referenceGenerator.getRef();
 
-            synchronized (PIcontroller) { // To avoid parameter changes in between
-                // Compute control signal
-                double u = limit(PIcontroller.calculateOutput(y, ref), uMin, uMax);
 
-                // Set output
-                analogOut.set(u);
+            synchronized (PIDcontroller) {
+                double y = analogInPosition.get(); // Get the current ball position from the sensor
+                double ref = referenceGenerator.getRef(); // Get the ref Value
+                double u = limit(PIDcontroller.calculateOutput(y, ref), uMin, uMax);
 
                 // Update state
-                PIcontroller.updateState(u);
+                PIDcontroller.updateState(u);
+
+
+                synchronized (PIcontroller) { // To avoid parameter changes in between
+                    // Compute control signal
+                    double angle = analogInAngle.get();
+                    double v = limit(PIcontroller.calculateOutput(angle, u), uMin, uMax);
+
+                    // Set output
+                    analogOut.set(v);
+
+                    // Update state
+                    PIcontroller.updateState(v);
+                }
+                analogRef.set(ref); // Only for the plotter animation
+
             }
-
-            synchronized (PIcontroller) { // To avoid parameter changes in between
-                // Compute control signal
-                double u = limit(PIcontroller.calculateOutput(y, ref), uMin, uMax);
-
-                // Set output
-                analogOut.set(u);
-
-                // Update state
-                PIcontroller.updateState(u);
-            }
-            analogRef.set(ref); // Only for the plotter animation
 
             t = t + PIcontroller.getHMillis();
             long duration = t - System.currentTimeMillis();

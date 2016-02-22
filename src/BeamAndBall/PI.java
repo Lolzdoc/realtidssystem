@@ -17,7 +17,7 @@ public class PI {
         p.Beta = 1.0;
         p.H = 0.1;
         p.integratorOn = false;
-        p.K = 1.0;
+        p.K = 2;
         p.Ti = 0.0;
         p.Tr = 10.0;
         new PIGUI(this, p, name);
