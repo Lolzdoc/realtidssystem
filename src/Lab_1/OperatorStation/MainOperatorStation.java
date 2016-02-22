@@ -1,21 +1,29 @@
-package src.Lab_1;
+package src.Lab_1.OperatorStation;
 
+import src.Lab_1.*;
 import javax.swing.*;
 
-public class Main {
+public class MainOperatorStation {
     public static void main(String[] argv) {
-
-        final int regulPriority = 8;
         final int refGenPriority = 6;
         final int plotterPriority = 7;
 
-        ReferenceGenerator refgen = new ReferenceGenerator(refGenPriority);
-        Regul regul = new Regul(regulPriority);
-        final  OpCom opcom = new OpCom(plotterPriority); // Must be declared final since it is used in an inner class
+        String host = "localhost";
+        int port = 4444;
 
-        regul.setRefGen(refgen);
-        regul.setOpCom(opcom);
+        CommClient commClient = new CommClient(host, port);
+
+        ReferenceGenerator refgen = new ReferenceGenerator(refGenPriority);
+
+        final OpCom opcom = new OpCom(plotterPriority);//Must be declared final since it is used in an inner class
+
+        RegulProxy regul = new RegulProxy(commClient);
+
         opcom.setRegul(regul);
+        commClient.setRefGen(refgen);
+
+        Thread t = new Thread(commClient);
+        t.start();
 
         Runnable initializeGUI = new Runnable(){
             public void run(){
@@ -29,7 +37,8 @@ public class Main {
             return;
         }
 
+        commClient.setOpCom(opcom);
+
         refgen.start();
-        regul.start();
     }
 }

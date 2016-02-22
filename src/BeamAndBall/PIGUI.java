@@ -3,7 +3,6 @@ package src.BeamAndBall;
 import se.lth.control.BoxPanel;
 import se.lth.control.DoubleField;
 import se.lth.control.MainFrame;
-import src.BeamAndBall.*;
 
 
 import javax.swing.*;

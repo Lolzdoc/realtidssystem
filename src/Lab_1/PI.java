@@ -20,7 +20,7 @@ public class PI {
         p.K = 1.8;
         p.Ti = 0.0;
         p.Tr = 10.0;
-        new PIGUI(this, p, name);
+        //ew PIGUI(this, p, name);
         setParameters(p);
 
         this.I = 0.0;
@@ -52,5 +52,16 @@ public class PI {
             I = 0.0;
         }
     }
+
+    public synchronized PIParameters getParameters() {
+        return p;
+    }
+
+    // Sets the I-part of the controller to 0.
+    // For example needed when changing controller mode.
+    public synchronized void reset(){
+        this.I = 0.0;
+    }
+
 }
 

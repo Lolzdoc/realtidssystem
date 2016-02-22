@@ -28,7 +28,7 @@ public class PID {
         p.Tr = 10.0;
         p.Td = 1.3;
         p.N = 10;
-        new PIDGUI(this, p, name);
+       // new PIDGUI(this, p, name);
         setParameters(p);
 
         this.I = 0.0;
@@ -78,5 +78,13 @@ public class PID {
         if (!p.integratorOn) {
             I = 0.0;
         }
+    }
+    public synchronized PIDParameters getParameters() {
+        return p;
+    }
+
+    public synchronized void reset(){
+        this.I = 0.0;
+        this.D = 0.0;
     }
 }
