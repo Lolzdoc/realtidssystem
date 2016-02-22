@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="realtidssystem">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/virtualsimulator.jar!/" />
+      <root url="jar://$PROJECT_DIR$/csrt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/regler.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

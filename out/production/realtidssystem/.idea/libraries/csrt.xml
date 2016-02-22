@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="csrt">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/CommonResources/csrt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

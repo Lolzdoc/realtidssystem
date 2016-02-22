@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="virtualsimulator">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/CommonResources/virtualsimulator.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/src/CommonResources/virtualsimulator.jar!/" />
+    </SOURCES>
+  </library>
+</component>
