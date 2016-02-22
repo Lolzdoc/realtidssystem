@@ -15,9 +15,9 @@ public class PI {
     public PI(String name) {
         PIParameters p = new PIParameters();
         p.Beta = 1.0;
-        p.H = 0.1;
+        p.H = 0.045;
         p.integratorOn = false;
-        p.K = 2;
+        p.K = 1.8;
         p.Ti = 0.0;
         p.Tr = 10.0;
         new PIGUI(this, p, name);

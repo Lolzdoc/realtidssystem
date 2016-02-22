@@ -51,8 +51,6 @@ public class BallAndBeamRegul extends Thread {
         long t = System.currentTimeMillis();
         while (true) {
             // Read inputs
-
-
             synchronized (PIDcontroller) {
                 double y = analogInPosition.get(); // Get the current ball position from the sensor
                 double ref = referenceGenerator.getRef(); // Get the ref Value

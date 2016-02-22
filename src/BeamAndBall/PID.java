@@ -21,13 +21,13 @@ public class PID {
 
         PIDParameters p = new PIDParameters();
         p.Beta = 1.0;
-        p.H = 0.1;
+        p.H = 0.05;
         p.integratorOn = false;
-        p.K = (-0.01);
+        p.K = (-0.2);
         p.Ti = 0.0;
         p.Tr = 10.0;
-        p.Td = 0.5;
-        p.N = 5;
+        p.Td = 1.3;
+        p.N = 10;
         new PIDGUI(this, p, name);
         setParameters(p);
 
@@ -54,7 +54,7 @@ public class PID {
     // Should use tracking-based anti-windup
     // Called from BallAndBeamRegul.
     public synchronized void updateState(double u){
-
+        this.u = u;
         if (p.integratorOn) {
             I = I + (p.K * p.H / p.Ti) * e + (p.H / p.Tr) * (u - v);
         } else {
