@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/regler"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/virtualsimulator"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/csrt"/>
+	<classpathentry kind="output" path="out/production/realtidssystem"/>
+</classpath>

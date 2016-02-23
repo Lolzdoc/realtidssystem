@@ -13,8 +13,9 @@ public class Main {
         Regul regul = new Regul(regulPriority);
         final  OpCom opcom = new OpCom(plotterPriority); // Must be declared final since it is used in an inner class
 
-        regul.setRefGen(refgen);
         regul.setOpCom(opcom);
+        regul.setRefGen(refgen);
+
         opcom.setRegul(regul);
 
         Runnable initializeGUI = new Runnable(){

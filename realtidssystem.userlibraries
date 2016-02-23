@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="csrt">
+    <archive path="C:/Users/hansr/Documents/GitHub/realtidssystem_Lab_3/src/CommonResources/csrt.jar" />
+  </library>
+  <library name="realtidssystem" />
+  <library name="regler">
+    <archive path="C:/Users/hansr/Documents/GitHub/realtidssystem_Lab_3/src/CommonResources/regler.jar" />
+  </library>
+  <library name="virtualsimulator">
+    <archive path="C:/Users/hansr/Documents/GitHub/realtidssystem_Lab_3/src/CommonResources/virtualsimulator.jar" />
+  </library>
+</eclipse-userlibraries>
+
