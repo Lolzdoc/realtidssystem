@@ -45,41 +45,26 @@ public class Regul extends Thread implements Regul_interface {
             e.printStackTrace();
         }
 
-        /*
-        innerPar.K = 4.0;
-        innerPar.Ti = 0.0;
-        innerPar.Tr = 10.0;
-        innerPar.Beta = 1.0;
-        innerPar.H = 0.05;
-        innerPar.integratorOn = false; */
+
         innerPar = new PIParameters();
         innerPar.K = 1.8;
-        innerPar.Ti = 0.0;
+        innerPar.Ti = 1;
         innerPar.Tr = 10.0;
         innerPar.Beta = 1.0;
         innerPar.H = 0.045;
-        innerPar.integratorOn = false;
+        innerPar.integratorOn = true;
 
         outerPar = new PIDParameters();
 
-        /*
-        outerPar.K = -0.05;
-        outerPar.Ti = 0.0;
-        outerPar.Td = 2.0;
-        outerPar.Tr = 10.0;
-        outerPar.N = 10.0;
-        outerPar.Beta = 1.0;
-        outerPar.H = 0.05;
-        outerPar.integratorOn = false; */
 
         outerPar.K = -(0.2);
-        outerPar.Ti = 0.0;
+        outerPar.Ti = 1;
         outerPar.Td = 1.3;
         outerPar.Tr = 10.0;
         outerPar.N = 10.0;
         outerPar.Beta = 1.0;
         outerPar.H = 0.05;
-        outerPar.integratorOn = false;
+        outerPar.integratorOn = true;
 
         inner_PI.setParameters(innerPar);
         outer_PID.setParameters(outerPar);
@@ -101,7 +86,7 @@ public class Regul extends Thread implements Regul_interface {
 
     private void ball_controller(){
         try {
-        synchronized (inner_PI) {
+        synchronized (outer_PID) {
             double  y = analogInPosition.get(); // Get the current ball position from the sensor
             double ref = r.getRef(); // Get the ref Value
             double u = limit(outer_PID.calculateOutput(y, ref), uMin, uMax);
@@ -115,7 +100,7 @@ public class Regul extends Thread implements Regul_interface {
                 double angle = analogInAngle.get();
                 double v = limit(inner_PI.calculateOutput(angle, u), uMin, uMax);
 
-
+                analogOut.set(v);
                 // Update state
                 inner_PI.updateState(v);
             }
@@ -203,6 +188,11 @@ public class Regul extends Thread implements Regul_interface {
                         e.printStackTrace();
                         return;
                     }
+
+                    t = t + inner_PI.getHMillis() + outer_PID.getHMillis();
+                    duration = t - System.currentTimeMillis();
+                    Regul_sleep(duration);
+
                     break;
 
             }
@@ -212,6 +202,7 @@ public class Regul extends Thread implements Regul_interface {
     }
     /** Stops the thread. */
     private void stopThread() {
+
         doIt = false;
     }
 
@@ -250,7 +241,8 @@ public class Regul extends Thread implements Regul_interface {
         mode = BEAM;
         inner_PI.reset();
         outer_PID.reset();
-        System.out.println("Controller in BEAM mode");
+        System.out.println("Controller in BEAM mode"
+);
     }
 
     /** Called by OpCom to set the Controller in BALL mode. */

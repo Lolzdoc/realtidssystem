@@ -35,7 +35,7 @@ public class PI {
     }
 
     public synchronized void updateState(double u) {
-        if (p.integratorOn) {
+        if (p.integratorOn && p.Ti != 0.0) {
             I = I + (p.K * p.H / p.Ti) * e + (p.H / p.Tr) * (u - v);
         } else {
             I = 0.0;
